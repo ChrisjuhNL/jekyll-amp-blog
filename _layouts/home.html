@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<div class="home">
+    <h1 class="h4 grey regular mt0">Home</h1>
+
+    {{ content }}
+
+    {% for post in site.posts %}
+    <section class="clearfix lsmb3">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+            <a href="{{ post.url | relative_url }}">
+                <h2 class="mt0 mb0" itemprop="name headline">{{ post.title | escape}}</h2>
+            </a>
+            <p class="mt0 grey">
+                <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                    {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+                    {{ post.date | date: date_format }}
+                </time>
+
+                {% if post.author %}
+                by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.author }}</span></span>
+                {% endif %}
+            </p>
+            <figure class="m0 lsfl lsmr1 lsw300">
+                <img itemprop="image" src="{{ post.header_img }}" alt="{{ post.header_img_alt }}">
+            </figure>
+            <p>{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ post.url | relative_url }}">Read more</a>
+            </p>
+        </article>
+    </section>
+    {% endfor %}
+
+    <p>subscribe <a href="{{ site.feed.path | prepend: site.baseurl | prepend: '/' | prepend: site.url }}">via RSS</a>
+    </p>
+
+</div>

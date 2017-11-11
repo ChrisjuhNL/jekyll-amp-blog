@@ -1,0 +1,82 @@
+---
+layout: default
+form: true
+---
+{% include breadcrumbs.html %}
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 class="mt0 mb0" itemprop="headline">{{ page.title | escape }}</h1>
+        <p class="mt0 grey">
+            {% if page.author %}
+            by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
+            on
+            {% endif %}
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                {% assign date_format = site.minima.date_format | default: "%B %-d, %Y" %}
+                {{ page.date | date: date_format }}
+            </time>
+
+        </p>
+    </header>
+
+    <div itemprop="articleBody">
+        {% if page.header_img and page.header_img_alt %}
+        <figure class="m0 center h5 grey italic lsfr lsw450 lsnegmt lsml1">
+            <img itemprop="image" src="{{ page.header_img }}" alt="{{ page.header_img_alt }}">
+            {% if page.header_img_alt_readable %}
+            <figcaption>{{ page.header_img_alt_readable }}</figcaption>
+            {% endif %}
+        </figure>
+        {% endif %}
+
+        {{ content }}
+    </div>
+</article>
+
+
+<section>
+    <ol class="pl0 mb0 list-style-none">
+        {% assign limitcomments = site.comment_limit %}
+        {% for comment in site.data.comments[page.slug]%}
+        {% assign totalcomments = forloop.length %}
+        {% break %}
+        {% endfor %}
+
+        {% if totalcomments %}
+        <h3>Comments
+            {% if totalcomments > limitcomments %}
+            <span class="grey h4">{{ limitcomments }} out of {{ totalcomments }}</span></h3>
+        {% endif %}
+        {% else %}
+        <h3>No comments</h3>
+        <p class="m0 h4 grey">Write the first comment</p>
+        {% endif %}
+        {% for comment in site.data.comments[page.slug] reversed limit:limitcomments %}
+        <li>
+            <article itemscope itemtype="https://schema.org/Comment">
+                <h4 class="mt0 mb0 left pr03" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">{{ comment.name }}</span>
+                </h4>
+                <p class="mt0 mb0 h5 grey">
+                    <time datetime="{{ comment.date }}" itemprop="dateCreated">{{ comment.date | date: "%-d %B %Y at
+                        %I:%M %p" }}
+                    </time>
+                </p>
+                <div itemprop="text">
+                    <p class="mt0">{{ comment.comment }}</p>
+                </div>
+            </article>
+        </li>
+        {% endfor %}
+        <form method="post"
+              action-xhr="{{ page.url }}"
+              target="_top">
+            <h3 class="pt1">Leave a comment</h3>
+            <label for="name">Name</label>
+            <input id="name" type="text" class="p1 mb2 rounded border inline-block col-12">
+            <label for="comment">Comment</label>
+            <textarea id="comment" rows="6" class="p1 rounded border inline-block col-12"></textarea>
+            <input class="p1 mb2 rounded border inline-block col-12" type="submit" value="Submit">
+        </form>
+    </ol>
+</section>

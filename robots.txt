@@ -1,0 +1,8 @@
+# Robots.txt
+#
+
+# Sitemap
+Sitemap: https://www.example.com/sitemap.xml
+
+User-agent: *
+Disallow:

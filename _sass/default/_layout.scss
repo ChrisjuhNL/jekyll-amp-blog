@@ -1,0 +1,45 @@
+.navigation {
+  background-color: #ffffff;
+  z-index: 999;
+  height: 40px;
+}
+
+.menu-line-height {
+  line-height: 40px;
+}
+
+main {
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.hamburger {
+  font-size: 21px;
+}
+
+nav.mobile {
+  height: 100%;
+  z-index: 999;
+  background: #ffffff;
+  background: rgba(255, 255, 255, .98);
+}
+
+.nav-takeover {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.grey {
+  color: #808080;
+}
+
+.black {
+  color: #111111;
+}
+
+.breadcrumb li+li:before {
+  content:"> ";
+}

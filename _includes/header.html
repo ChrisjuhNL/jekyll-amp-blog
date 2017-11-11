@@ -1,0 +1,45 @@
+<header class="navigation fixed top-0 left-0 right-0 pl1 pr1 xlpi xlp0 clearfix">
+
+    <div class="left overflow-hidden pt03 flex">
+        <a href="{{ site.url }}">
+            <amp-img alt="{{ site.title }} logo" width="25" height="25" class="align-middle pb03"
+                     src="{{site.url}}/assets/img/logo-small.png"></amp-img>
+            <span class="title black pl03">{{ site.title | escape }}</span></a>
+    </div>
+
+    <nav [class]="visible ? 'mobile fixed center col-12 px1 left-0 block' : 'mobile fixed center col-12 px1 left-0 display-none'"
+         class="mobile fixed center col-12 display-none" id="mobile-nav">
+        <div class="py0 pr1 pl0 nav-takeover">
+            <div class="nav-wrapper">
+                <div class="clearfix">
+                    <div class="left overflow-hidden pt03 flex">
+                        <a href="{{ site.url }}">
+                            <amp-img alt="{{ site.title }} logo" width="25" height="25" class="align-middle pb03"
+                                     src="{{site.url}}/assets/img/logo-small.png"></amp-img>
+                            <span class="title black pl03">{{ site.title | escape }}</span>
+                        </a>
+                    </div>
+                    <a id="nav-close" on="tap:AMP.setState({visible: !visible})"
+                       class="hamburger black pr1 fixed top-0 right-0">&#10006;</a>
+                </div>
+
+                <ol class="list-style-none pl0 h3" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+                    {% for menu_item in site.data.menuitems %}
+                    <li itemprop="name" class="mb2"><a itemprop="url" href="{{site.url}}/{{ menu_item.relative_url }}">{{
+                        menu_item.name }}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </nav>
+
+    <a id="nav-open" on="tap:AMP.setState({visible: !visible})" class="right hamburger black lshide">&#9776;</a>
+
+    <ol class="list-style-none m0 right menu-line-height seperator caps lsshow" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+        {% for menu_item in site.data.menuitems %}
+        <li itemprop="name" class="inline">
+            <a itemprop="url" class="hoverblack" href="{{site.url}}/{{ menu_item.relative_url }}">{{menu_item.name }}</a></li>
+        {% endfor %}
+    </ol>
+
+</header>

@@ -1,0 +1,22 @@
+<ol class="breadcrumb m0 p0" itemscope itemtype="http://schema.org/BreadcrumbList">
+    {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
+    <li class="inline" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="{{ site.url }}"><span itemprop="name">Home</span></a>
+        <meta itemprop="position" content="1"/>
+    </li>
+    {% for crumb in crumbs offset: 1 %}
+    {% if forloop.last %}
+    <li class="inline grey" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <span itemprop="name">{{ page.title }}</span>
+        <meta itemprop="position" content="1"/>
+    </li>
+    {% else %}
+    <li class="inline" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <a itemprop="item"
+           href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">
+            <span itemprop="name">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</span></a>
+        <meta itemprop="position" content="1"/>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ol>

@@ -1,0 +1,41 @@
+@media (min-width: 769px){
+  body {
+    //background-color: #fff2ef;
+  }
+
+  .lsshow {
+    display: block;
+  }
+
+  .lshide {
+    display: none;
+  }
+
+  .lsw450 {
+    width: 450px;
+  }
+
+  .lsfr {  float: right;  }
+  .lsfl {  float: left;  }
+
+  .lsml1 {  margin-left: .5rem;  }
+  .lsmr1 {  margin-right: .5rem;  }
+
+  .lsmb3 { margin-bottom: 2rem; }
+
+  .seperator li+li:before {
+    content:"| ";
+  }
+
+
+  // unused
+
+
+
+
+
+
+  .lsw300 {
+    width: 300px;
+  }
+}
